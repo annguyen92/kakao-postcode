@@ -75,23 +75,17 @@
             } else if (data.autoJibunAddress == "") {
               jibunAddress = data.jibunAddress;
             }
-
-            var agent = getMobileOperatingSystem();
-            if (agent == "iOS") {
-                var postData = {
+            var postData = {
               roadAddress: data.roadAddress,
               jibunAddress: jibunAddress,
               zonecode: data.zonecode,
             };
+            var agent = getMobileOperatingSystem();
+            if (agent == "iOS") {
             window.postMessageToiOS(postData);
             }
             if (agent == "Android") {
-                var postData = {
-              roadAddress: data.roadAddress,
-              jibunAddress: jibunAddress,
-              zonecode: data.zonecode,
-            };
-            // window.postMessageToAndroid(postData);
+            window.postMessageToAndroid(postData);
             onAddressSelected(data.zonecode);
             }
           },
