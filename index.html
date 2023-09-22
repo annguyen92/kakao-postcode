@@ -60,6 +60,10 @@
         AndroidBridge.receiveJSONData(JSON.stringify(postData));
       }
 
+      function onAddressSelected(address) {
+            AndroidBridge.onItemClick(address);
+        }
+
       var element_layer = document.getElementById("layer");
       function execDaumPostcode() {
         new daum.Postcode({
@@ -87,7 +91,8 @@
               jibunAddress: jibunAddress,
               zonecode: data.zonecode,
             };
-            window.postMessageToAndroid(postData);
+            // window.postMessageToAndroid(postData);
+            onAddressSelected(data.zonecode);
             }
           },
           width: "100%",
