@@ -60,16 +60,12 @@
         AndroidBridge.receiveJSONData(JSON.stringify(postData));
       }
 
-      function onAddressSelected(address) {
-            AndroidBridge.onItemClick(address);
-        }
-
       var element_layer = document.getElementById("layer");
       function execDaumPostcode() {
         new daum.Postcode({
           oncomplete: function (data) {
+            console.log("data data", data);
             var jibunAddress = "";
-
             if (data.jibunAddress == "") {
               jibunAddress = data.autoJibunAddress;
             } else if (data.autoJibunAddress == "") {
@@ -82,11 +78,10 @@
             };
             var agent = getMobileOperatingSystem();
             if (agent == "iOS") {
-            window.postMessageToiOS(postData);
+              window.postMessageToiOS(postData);
             }
             if (agent == "Android") {
-            window.postMessageToAndroid(postData);
-            onAddressSelected(data.zonecode);
+              window.postMessageToAndroid(postData);
             }
           },
           width: "100%",
