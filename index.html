@@ -64,24 +64,13 @@
       function execDaumPostcode() {
         new daum.Postcode({
           oncomplete: function (data) {
-            console.log("data data" + data);
-            var jibunAddress = "";
-            if (data.jibunAddress == "") {
-              jibunAddress = data.autoJibunAddress;
-            } else if (data.autoJibunAddress == "") {
-              jibunAddress = data.jibunAddress;
-            }
-            var postData = {
-              roadAddress: data.roadAddress,
-              jibunAddress: jibunAddress,
-              zonecode: data.zonecode,
-            };
+            console.log(data);
             var agent = getMobileOperatingSystem();
             if (agent == "iOS") {
-              window.postMessageToiOS(postData);
+              window.postMessageToiOS(data);
             }
             if (agent == "Android") {
-              window.postMessageToAndroid(postData);
+              window.postMessageToAndroid(data);
             }
           },
           width: "100%",
